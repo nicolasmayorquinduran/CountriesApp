@@ -40,8 +40,9 @@ router.get("/countries", async (req, res) => {
     
                  }
              }))
-        
-         res.json(name? // si llega un valor por query se filtran paises por nombre
+
+
+            let result = name? // si llega un valor por query se filtran paises por nombre
              await Country.findAll({
                  where:{
                         name: {
@@ -65,6 +66,29 @@ router.get("/countries", async (req, res) => {
                 }
             }]
         })
+        
+         res.json(
+
+            result.map(c =>
+                { return                    {
+                        cca3:c.cca3 ,
+                        name:c.name ,
+                        flags:c.flags ,
+                        continents:c.continents ,
+                        subregion:c.subregion ,
+                        area:c.area ,
+                        population:c.population ,
+
+                // la base de datos trae las actividades como un array de objetos
+                // donde cada uno tiene la propiedad name
+                 // la cual se mapea para convertirla en un array de strings
+
+                        activities:c.activities.map(a => a.name) 
+                        
+                        }
+                }
+                )
+            
          )
 
     } catch (error){

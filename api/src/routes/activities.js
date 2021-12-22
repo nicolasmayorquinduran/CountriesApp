@@ -46,6 +46,20 @@ router.post("/activity", async (req, res) => {
     }
 })
 
+router.get("/activities", async (req,res) => {
+    // este request trae todas las actividades creadas por los usuarios
+    // para que en el fontend se actualice en los filtros
+    try{
+
+        const allActivities = await Activity.findAll()
+        
+        // solo se envía un array de strings de los nombres
+        res.json( allActivities.map(a => a.name) ) 
+
+    } catch (err){
+        res.json({error:"No se pudo consultar o encontrar actividades"})
+    }
+})
 
 
 module.exports = router;

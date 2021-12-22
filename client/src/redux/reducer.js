@@ -5,7 +5,7 @@ import {ALLCOUNTRIES,
 const initialState = {
     allCountries : [],
     countryByPk : {},
-    Activities:[],
+    allActivities:[],
 }
 
 const Reducer = (store = initialState, action) => {
@@ -15,7 +15,7 @@ switch (action.type) {
     case COUNTRYBYPK:
         return {...store, countryByPk:action.payload}
         case ALLACTIVITIES:
-            return {...store, Activities:action.payload}
+            return {...store, allActivities:action.payload}
     default:
         return store
 }

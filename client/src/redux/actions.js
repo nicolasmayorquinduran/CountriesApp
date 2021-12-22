@@ -17,8 +17,13 @@ axios.get(`http://localhost:3001/countries/${id}`)
 .then(res => dispatch({type:COUNTRYBYPK, payload: res.data}))
 .catch(err => dispatch({type:COUNTRYBYPK, payload: {}}))
 
-export const postActivity = (id) => async (payload) => 
-axios.get(`http://localhost:3001/activity`, payload)
-.then(res => res)
-.catch(err => err)
+export const getAllActivities = () => async (dispatch) => 
+axios.get(`http://localhost:3001/activities`)
+.then(res => dispatch({type:ALLACTIVITIES, payload: res.data}))
+.catch(err => dispatch({type:ALLACTIVITIES, payload: []}))
 
+export const postActivity = async (payload) => {
+        return axios.post('http://localhost:3001/activity', payload)
+       .then(function (response) {})
+       .catch(function (error) {});
+     };
