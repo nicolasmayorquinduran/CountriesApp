@@ -57,7 +57,12 @@ const Index = () => {
 
     return (
         country.hasOwnProperty("cca3") ?
-        <> <h1 id='title'>{country.name}</h1>
+        <> 
+        <div id='title'>
+        <h1 >{`${country.cca3} / ${country.name.toUpperCase()}`}</h1>
+        <h3>{`Capital: ${country.capital}`}</h3>
+        </div>
+        
             <Wrapper>
                 <div id = "country">
                 
