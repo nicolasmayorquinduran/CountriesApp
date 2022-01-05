@@ -22,6 +22,9 @@ function App() {
         <Route path="/home" element={<Home/>}/> 
         <Route path="/create" element={<Create/>}/> 
         <Route path="/Country/:id" element={<Detail/>}/> 
+        <Route path="/prueba" element={<div>hola</div>}/> 
+
+
       </Routes> 
       </>
       }

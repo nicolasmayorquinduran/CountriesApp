@@ -1,7 +1,7 @@
 import {useState, useEffect, useRef} from 'react';
 import Country from "../countries/Country"
 import styled from 'styled-components';
-import {getAllCountries} from "../../redux/actions"
+import {getAllCountries, putPage} from "../../redux/actions"
 import {useDispatch, useSelector} from "react-redux"
 import {filterByContinent, filterBySort, matchByActivities} from "./filters"
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'
@@ -61,7 +61,7 @@ margin-bottom: 10px;
 
 const Index = ({continent, activity, sort, search}) => {
 
-    let [page, setPage] = useState(9)
+    // let [page, setPage] = useState(9)
 
     // const getListSize = () => {
     //     const newWidth = imgRef.current.clientWidth;
@@ -69,11 +69,12 @@ const Index = ({continent, activity, sort, search}) => {
     //   };
 
 
+    let page = useSelector(store => store.page)
     const dispatch = useDispatch()
     useEffect(() => {
-        setPage(9);
+        // setPage(9);
         return dispatch(getAllCountries(search))},
-    [dispatch, continent, activity, search])
+    [dispatch, continent, activity, search, page])
     
     let allCountries = useSelector(store => store.allCountries)
     allCountries = matchByActivities(filterByContinent(filterBySort(allCountries, sort), continent), activity)
@@ -82,20 +83,20 @@ const Index = ({continent, activity, sort, search}) => {
         <Pagination>
             <>{
                 page > 9 &&
-                    <FontAwesomeIcon icon={faChevronLeft} onClick={()=> setPage(page-9)}/>
+                    <FontAwesomeIcon icon={faChevronLeft} onClick={()=> dispatch(putPage(page-9))}/>
             }</>
             <ul>
             {
                 allCountries.map((c,i)=>
                 i>0 && i%9==0 &&
-                <li onClick={()=> setPage(page=i)}><a>{i/9}</a></li>
+                <li onClick={()=> dispatch(putPage(page=i))}><a>{i/9}</a></li>
                 )
             }
-                 <li onClick={()=> setPage(page= allCountries.length + 1)}>{Math.ceil(allCountries.length / 9)}</li>
+                 <li onClick={()=> dispatch(putPage(page= allCountries.length + 1))}>{Math.ceil(allCountries.length / 9)}</li>
             </ul>
             <>{
                 page < allCountries.length + 1 &&
-                    <FontAwesomeIcon icon={faChevronRight} onClick={()=> setPage(page+9)}/>
+                    <FontAwesomeIcon icon={faChevronRight} onClick={()=> dispatch(putPage(page+9))}/>
             }</>
         </Pagination>
 

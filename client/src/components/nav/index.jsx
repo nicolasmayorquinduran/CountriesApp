@@ -15,7 +15,7 @@ const Links = styled.div`
     position: sticky;
     z-index:100;
     top: 0;
-    & a{
+    & svg{
         color:#000;
         padding: 16px;
         margin-top: 10px;
@@ -34,7 +34,7 @@ const Index = () => {
     return (
         <>
             <Links>
-            <Link to = "/home" onClick={dispatch(getAllCountries())}>
+            <Link to = "/home">
                 <FontAwesomeIcon icon={faHome} />
             </Link>
             <Link to = "/create">

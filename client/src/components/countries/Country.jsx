@@ -3,27 +3,31 @@ import styled from "styled-components"
 import {Link} from "react-router-dom"
 import SphereShadows from "../../img/shadows-sphere.jpg"
 import SphereLigth from "../../img/ligths-sphere.jpg"
+import { useLocation } from 'react-router-dom';
 
 
 
-const Country = ({Image,  Name, Continent, id}) => {
+const Country = ({Image,  Name, Continent, Region, id}) => {
 // Cada país es una tarjeta que renderiza los siguientes datos
 // Imagen de la bandera
 // Nombre
 // Continente
-
+const location = useLocation()
+console.log(location)
 let prueba = 100;
 const Country = styled.div`
 & div:hover{
     opacity: 1;
     transform: translateX(0px) rotate(45deg);
     transition:all 7s ease-out;
+} & h3{
+    text-transform: capitalize;
 }
 `
 const Flag = styled.div`
 {
     overflow: hidden;
-    height:${window.innerWidth *.126}px;
+    height:12.6vw;
     width:70%;
     margin:auto;
     position: Relative;
@@ -80,6 +84,9 @@ const Path2 = styled.div`
                    <img src={Image}/>
                </Flag>
                    <p>{Continent}</p>
+                   {location.pathname !== "/home" ? 
+                   <p className='subregion'>{`Sub-Region: ${Region}`}</p>:
+                   null}
             </Country>
             </Link>
         </div>

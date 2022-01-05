@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react';
 import {useSelector, useDispatch} from "react-redux"
 import Countries from "../countries"
-import {getAllActivities} from "../../redux/actions"
+import {getAllActivities, putPage} from "../../redux/actions"
 import styled from 'styled-components';
 
 
@@ -32,6 +32,7 @@ font-weight: bold;
 
 const Index = () => {
 
+
     const [state, setState] = useState({
         search:"",
         continent:"",
@@ -50,6 +51,7 @@ const Index = () => {
         setState({
             ...state, [e.target.id]:e.target.value
         })
+        dispatch(putPage(9))
     }
 
 

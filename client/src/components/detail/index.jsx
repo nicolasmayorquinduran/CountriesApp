@@ -22,7 +22,24 @@ import { faMale, faThLarge } from '@fortawesome/free-solid-svg-icons'
 // [ ] Actividades turísticas con toda su información asociada
 
 
-const Activities= styled.div``
+const Activities= styled.div`
+{
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+} & .activityContainer {
+    width: 30%;
+    padding: 1%;
+    margin: 15px 0;
+    background: rgba(255, 255, 255, 0.2);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(5px);
+-webkit-backdrop-filter: blur(5px);
+border: 1px solid rgba(255, 255, 255, 0.3);
+}`
 
 
 const Index = () => {
@@ -34,16 +51,16 @@ const Index = () => {
     const country = useSelector(store => store.countryByPk)
 
     const Wrapper= styled.div`
-    display:flex;
-    flex-wrap:wrap;
-    height: 100vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
     & #country {
         display: flex;
         justify-content: center;
+        padding-bottom: 60px;
         width: 100%;
-    } & #country div {
+    } & #country {
         width: 80%;
-        height:${window.innerWidth *.27}px;
         margin: auto;
     } & #infography, #sphere {
         display: flex;
@@ -70,8 +87,8 @@ const Index = () => {
                 <Country 
                 Image ={country.flags }
                 Continent={country.continents.join(", ")}
+                Region = {country.subregion}
                 id ={country.cca3} />
-                <p className='subregion'>{`Subregion : ${country.subregion} `}</p>
                 </div>
 
                 <div id ="infography">
@@ -88,19 +105,23 @@ const Index = () => {
                 </div>
                 </div>
 
+                <h2 style={{margin:"0"}}>{country.activities.length? "Activities":null}</h2>
+
             <Activities>
+           
             {country.activities.map(a =>
                <>
-                <h3>{a.name}</h3>
-                <h6>{a.difficulty}</h6>
-                <h6>{a.duration}</h6>
-                <ul>
-                {a.season.map(s =>
-                    <>
-                    <li>{s}</li>
-                    </>
-                    )}
-               </ul>
+                <div className='activityContainer'>
+                <h2>{a.name.toUpperCase()}</h2>
+                 <hr></hr>
+                <h3>{`dificutlty: ${a.difficulty}`}</h3>
+                <div style={{width:"100%", height:"20px", backgroundColor:"#000"}}>
+                <div style={{width:`${a.difficulty * 20}%`, height:"100%", backgroundColor:"#0c0"}}></div>
+                </div>
+                <h6>{`${a.duration} hours of duration`}</h6>
+                <h2>Season it´s practiced</h2>
+                <p>{a.season.join(", ")}</p>
+                </div>
                </>
                 )
                 }

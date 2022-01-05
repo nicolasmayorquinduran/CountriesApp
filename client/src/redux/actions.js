@@ -1,7 +1,8 @@
 import axios from "axios"
 import {ALLCOUNTRIES,
         COUNTRYBYPK,
-        ALLACTIVITIES,} from "./actionTypes"
+        ALLACTIVITIES,
+        PAGE} from "./actionTypes"
 
 export const getAllCountries = (name) => async (dispatch) => 
 name?
@@ -27,3 +28,5 @@ export const postActivity = async (payload) => {
        .then(function (response) {})
        .catch(function (error) {});
      };
+
+export const putPage = (payload) => async (dispatch) =>  dispatch({type:PAGE, payload})
